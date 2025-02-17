@@ -4,9 +4,11 @@ import { assets} from "@/assets/assets";
 import Link from "next/link"
 import { useAppContext } from "@/context/AppContext";
 import Image from "next/image";
+import { useClerk } from "@clerk/nextjs";
 
+
+const {openSignIn}=useClerk();
 const Navbar = () => {
-
   const { isSeller, router } = useAppContext();
 
   return (
@@ -32,12 +34,11 @@ const Navbar = () => {
         </Link>
 
         {isSeller && <button onClick={() => router.push('/seller')} className="text-xs border px-4 py-1.5 rounded-full">Seller Dashboard</button>}
-
       </div>
 
       <ul className="hidden md:flex items-center gap-4 ">
         <Image className="w-4 h-4" src={assets.search_icon} alt="search icon" />
-        <button onClick={openSignIn} className="flex items-center gap-2 hover:text-gray-900 transition">
+        <button onClick={openSignIn}className="flex items-center gap-2 hover:text-gray-900 transition">
           <Image src={assets.user_icon} alt="user icon" />
           Account
         </button>
